@@ -1,0 +1,8 @@
+.git
+.github
+.vscode
+coverage
+
+node_module
+npm-debug.log
+npm-debug.log.*
