@@ -1,9 +1,10 @@
 version: "3.5"
 
 services:
-  mongodb:
+  mongo:
     image: mongo:latest
+    command: mongod --port 27015
     environment:
       - MONGODB_DATABASE="simplecrud"
     ports:
-      - "27017:27017"
+      - "27015:27015"
