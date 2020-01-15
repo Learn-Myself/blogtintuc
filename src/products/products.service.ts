@@ -1,7 +1,7 @@
-import {Inject, Injectable} from '@nestjs/common';
-import {Model} from 'mongoose';
-import {ProductInterface} from './Interfaces/product.interface';
-import {ProductDTO} from './DTO/create.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { ProductInterface } from './Interfaces/product.interface';
+import { ProductDTO } from './DTO/create.dto';
 
 @Injectable()
 export class ProductsService {
@@ -14,24 +14,19 @@ export class ProductsService {
     }
 
     async getProducts(): Promise<ProductInterface[]> {
-        const products = await this.productModel.find();
-        return products;
+        return this.productModel.find();
     }
 
     async getProduct(productId: string): Promise<ProductInterface>{
-        const product = await this.productModel.findById(productId);
-        return product;
+        return this.productModel.findById(productId);
     }
 
     async update(productId: string, createProductDTO: ProductDTO): Promise<ProductInterface> {
-        const product = await this.productModel
-            .findByIdAndUpdate(productId, createProductDTO, {new: true});
-        return product;
+        return this.productModel.updateOne(this.productModel.findById(productId), createProductDTO);
     }
 
     async delete(productId: string): Promise<any> {
-        const product = await this.productModel.findByIdAndDelete(productId);
-        return product;
+        return this.productModel.deleteOne(this.productModel.findById(productId));
     }
 
 }

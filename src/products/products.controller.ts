@@ -59,7 +59,6 @@ export class ProductsController {
     @Get('/')
     @Render('products')
     async getProducts(@Res() res: any): Promise<any> {
-        console.log(res);
         const products = await this.productService.getProducts();
         // return res.status(HttpStatus.OK).json(products);
         return {products}; // return templete include data
