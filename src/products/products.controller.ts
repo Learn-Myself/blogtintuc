@@ -33,7 +33,7 @@ export class ProductsController {
     @Get('/edit/:productId')
     @Render('editProduct')
     async editProduct(@Res() res: any, @Param('productId') productId: any): Promise<any> {
-        const product = await this.productService.getProduct(productId);
+        const product = await this.productService.findById(productId);
         if (!product) {
             throw new NotFoundException('Product does not exist!');
         }
@@ -61,21 +61,22 @@ export class ProductsController {
     async getProducts(@Res() res: any): Promise<any> {
         const products = await this.productService.getProducts();
         // return res.status(HttpStatus.OK).json(products);
-        return {products}; // return templete include data
+        return {products}; // return template include data
     }
 
     // GET single product: /products/5c9d46100e2e5c44c444b2d1
     @UseGuards(AuthenticatedGuard)
     @Get(':productID')
-    async getProduct(@Res() res: any, @Param('productID') productId: any): Promise<ProductInterface[]> {
+    async findById(@Res() res: any, @Param('productID') productId: any): Promise<any> {
         if (!productId) {
             throw new NotFoundException('Product does not exist!');
         }
-        const product = await this.productService.getProduct(productId);
-        return res.status(HttpStatus.OK).json({
-            message: 'Product is Got successfully !',
-            product,
-        });
+        const product = await this.productService.findById(productId);
+        // return res.status(HttpStatus.OK).json({
+        //     message: 'Product is Got successfully !',
+        //     product,
+        // });
+        return {product};
     }
 
     // Update Product: /update/5c9d45e705ea4843c8d0e8f7

@@ -5,28 +5,28 @@ import { ProductDTO } from './DTO/create.dto';
 
 @Injectable()
 export class ProductsService {
-    constructor(@Inject('PRODUCT_MODEL') private readonly productModel: Model<ProductInterface>) {
-    }
+  constructor(@Inject('PRODUCT_MODEL') private readonly productModel: Model<ProductInterface>) {
+  }
 
-    async create(createProductDTO: ProductDTO): Promise<ProductInterface> {
-        const createProduct: ProductInterface = new this.productModel(createProductDTO);
-        return await createProduct.save();
-    }
+  async create(productDTO: ProductDTO): Promise<ProductInterface> {
+    const createProduct: ProductInterface = new this.productModel(productDTO);
+    return await createProduct.save();
+  }
 
-    async getProducts(): Promise<ProductInterface[]> {
-        return this.productModel.find();
-    }
+  async getProducts(): Promise<ProductInterface[]> {
+    return this.productModel.find();
+  }
 
-    async getProduct(productId: string): Promise<ProductInterface>{
-        return this.productModel.findById(productId);
-    }
+  async findById(id: string): Promise<ProductInterface> {
+    return this.productModel.findById(id);
+  }
 
-    async update(productId: string, createProductDTO: ProductDTO): Promise<ProductInterface> {
-        return this.productModel.updateOne(this.productModel.findById(productId), createProductDTO);
-    }
+  async update(id: string, productDTO: ProductDTO): Promise<ProductInterface> {
+    return this.productModel.updateOne(this.productModel.findById(id), productDTO);
+  }
 
-    async delete(productId: string): Promise<any> {
-        return this.productModel.deleteOne(this.productModel.findById(productId));
-    }
+  async delete(id: string): Promise<any> {
+    return this.productModel.deleteOne(this.productModel.findById(id));
+  }
 
 }

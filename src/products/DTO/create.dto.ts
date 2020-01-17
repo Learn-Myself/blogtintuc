@@ -1,5 +1,12 @@
+import { IsNotEmpty } from 'class-validator';
+
 export class ProductDTO {
-     public title: string;
-     public description: string;
-     public price: number;
+  @IsNotEmpty()
+  public title: string;
+
+  @IsNotEmpty()
+  public description: string;
+
+  @IsNotEmpty()
+  public price: number;
 }

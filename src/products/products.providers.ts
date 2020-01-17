@@ -1,5 +1,5 @@
-import {Connection} from 'mongoose';
-import {ProductSchema} from './Schema/product.schema';
+import { Connection } from 'mongoose';
+import { ProductSchema } from './Schema/product.schema';
 
 export const productsProviders = [{
     provide: 'PRODUCT_MODEL',
